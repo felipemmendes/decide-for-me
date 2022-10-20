@@ -10,9 +10,18 @@ const result = ref<string | null>(null);
 const question = ref<string>("");
 const yes = ref<string>(DEFAULT_YES);
 const no = ref<string>(DEFAULT_NO);
+const calculating = ref<boolean>(false);
 
 const choose = () => {
   result.value = Math.random() > 0.5 ? yes.value : no.value;
+  calculating.value = false;
+};
+
+const repeat = () => {
+  calculating.value = true;
+  setTimeout(() => {
+    choose();
+  }, 500);
 };
 </script>
 
@@ -57,20 +66,38 @@ const choose = () => {
         <div class="flex flex-col items-center gap-4">
           <div class="text-lg">Should I {{ question }}?</div>
           <Transition
+            mode="out-in"
             appear
-            appear-from-class="opacity-0"
-            appear-active-class="transition ease-in delay-[2000ms]"
+            appear-from-class="blur-xl"
+            appear-active-class="transition ease-linear duration-[2000ms]"
+            enter-from-class="blur-xl"
+            enter-active-class="transition ease-linear duration-[2000ms]"
+            leave-to-class="blur-xl"
+            leave-active-class="transition ease-linear duration-[500ms]"
           >
-            <div class="text-2xl h-10">
+            <div class="text-2xl h-10" v-if="!calculating">
               {{ result }}
             </div>
+            <div class="h-10" v-else></div>
           </Transition>
         </div>
-        <div class="flex items-center text-sm">
-          <div>Nothing is set on stone. Really.</div>
-          <Button @click="result = null" bnt-type="primaryGhost" class="pl-1">
-            Want to try again?
-          </Button>
+        <div class="flex items-center justify-center">
+          <Button @click="repeat" bnt-type="primaryFill">Try again</Button>
+        </div>
+        <div class="flex flex-col items-center text-sm gap-0">
+          <div>
+            Want to
+            <Button
+              @click="
+                calculating = false;
+                result = null;
+              "
+              bnt-type="primaryGhost"
+              class="pl-0"
+            >
+              change options?
+            </Button>
+          </div>
         </div>
       </div>
     </Transition>

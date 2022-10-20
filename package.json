@@ -12,7 +12,7 @@
     "dev": "run-p dev:*",
     "dev:vite": "vite",
     "dev:css": "npm run generate:css -- --watch",
-    "generate:css": "npx tailwindcss -o ./src/assets/tailwind.css"
+    "generate:css": "npx tailwindcss -o ./src/assets/style.css"
   },
   "dependencies": {
     "vue": "^3.2.37"
