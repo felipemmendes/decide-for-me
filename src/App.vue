@@ -12,7 +12,7 @@ const currentTab = ref(0);
 </script>
 
 <template>
-  <header class="flex items-center w-full">
+  <header class="flex items-center w-full px-8">
     <nav class="mx-auto flex">
       <button
         v-for="(tab, index) in tabs"
@@ -25,7 +25,7 @@ const currentTab = ref(0);
       </button>
     </nav>
   </header>
-  <main class="flex flex-col items-center justify-center flex-1">
+  <main class="flex flex-col items-center justify-center flex-1 px-8">
     <Transition
       mode="out-in"
       enter-active-class="transition ease-in delay-250"
@@ -36,7 +36,7 @@ const currentTab = ref(0);
       <component :is="tabs[currentTab].component"></component>
     </Transition>
   </main>
-  <footer class="flex items-center justify-center h-12">
+  <footer class="flex items-center justify-center h-12 px-8">
     <div>fmmendes.com</div>
   </footer>
 </template>
