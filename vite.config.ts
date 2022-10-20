@@ -14,7 +14,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       external: [
-        fileURLToPath(new URL("/src/assets/style.css", import.meta.url)),
+        fileURLToPath(new URL("./src/assets/style.css", import.meta.url)),
       ],
     },
   },
